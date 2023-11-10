@@ -347,7 +347,7 @@ public class Produto extends javax.swing.JFrame {
     public void SelectProd()
 {
     try{
-    Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+    Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
     St = Con.createStatement();
     Rs = St.executeQuery("select * from PRODUTOTBL");
     ProdutosTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -360,9 +360,9 @@ public class Produto extends javax.swing.JFrame {
 //Seleciona as Categorias no Banco de Dados        
 private void GetCat(){
     try{
-        Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+        Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
         St = Con.createStatement();
-        String query = "select * from Andre.CATEGORIATBL";
+        String query = "select * from DB.CATEGORIATBL";
         Rs = St.executeQuery(query);
         while(Rs.next()){
             String MyCat = Rs.getString("CATNOME");
@@ -376,7 +376,7 @@ private void GetCat(){
 //Auto preenchimento e incremento   
  private void id_autoincrement(){
         try{
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
             String sqlquery = "select max(PRODID) from PRODUTOTBL";
             PreparedStatement pst = Con.prepareStatement(sqlquery);
             ResultSet rs = pst.executeQuery();
@@ -412,7 +412,7 @@ private void GetCat(){
 //Botão que inclui as entradas no banco de dados       
     private void IncluirBTNMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncluirBTNMouseClicked
         try{
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
             PreparedStatement add = Con.prepareStatement("insert into PRODUTOTBL values(?,?,?,?,?)");
             add.setInt(1, Integer.valueOf(ProdId.getText()));
             add.setString(2, ProdNome.getText());
@@ -439,9 +439,9 @@ private void GetCat(){
         else
         {
             try{
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
             String Id = ProdId.getText();
-            String Query = "Delete from Andre.PRODUTOTBL where PRODID="+Id;
+            String Query = "Delete from DB.PRODUTOTBL where PRODID="+Id;
             Statement Add = Con.createStatement();
             Add.executeUpdate(Query);
             SelectProd();
@@ -476,8 +476,8 @@ private void GetCat(){
         else
         {
             try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");    
-            String Editar = "update Andre.PRODUTOTBL set PRODNOME='"+ProdNome.getText()+"'"+",PRODQTD="+ProdQtd.getText()+""+",PRODDESC='"+ProdDesc.getText()+"'"+",PRODCAT='"+CatCb.getSelectedItem()+"'"+"where PRODID ="+ProdId.getText();
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");  
+            String Editar = "update DB.PRODUTOTBL set PRODNOME='"+ProdNome.getText()+"'"+",PRODQTD="+ProdQtd.getText()+""+",PRODDESC='"+ProdDesc.getText()+"'"+",PRODCAT='"+CatCb.getSelectedItem()+"'"+"where PRODID ="+ProdId.getText();
             Statement Add = Con.createStatement();
             Add.executeUpdate(Editar);
             JOptionPane.showMessageDialog(this,"Produto Editado com sucesso");
