@@ -282,7 +282,7 @@ public class Categoria extends javax.swing.JFrame {
     public void SelectCat()
 {
     try{
-    Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+    Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
     St = Con.createStatement();
     Rs = St.executeQuery("select * from CATEGORIATBL");
     CategoriaTbl.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -295,7 +295,7 @@ public class Categoria extends javax.swing.JFrame {
 //Auto preenchimento e incremento     
  private void id_autoincrement(){
         try{
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
             String sqlquery = "select max(CATID) from CATEGORIATBL";
             PreparedStatement pst = Con.prepareStatement(sqlquery);
             ResultSet rs = pst.executeQuery();
@@ -323,7 +323,7 @@ public class Categoria extends javax.swing.JFrame {
 //Botão que inclui as entradas no banco de dados    
     private void IncluirBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncluirBtnMouseClicked
         try{
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
             PreparedStatement add = Con.prepareStatement("insert into CATEGORIATBL values(?,?)");
             add.setInt(1, Integer.valueOf(CatId.getText()));
             add.setString(2, CatNome.getText());
@@ -358,9 +358,9 @@ public class Categoria extends javax.swing.JFrame {
         else
         {
             try{
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");
             String Id = CatId.getText();
-            String Query = "Delete from Andre.CATEGORIATBL where CATID="+Id;
+            String Query = "Delete from DB.CATEGORIATBL where CATID="+Id;
             Statement Add = Con.createStatement();
             Add.executeUpdate(Query);
             SelectCat();
@@ -381,8 +381,8 @@ public class Categoria extends javax.swing.JFrame {
         else
         {
             try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventariodb","Andre","1234");    
-            String Editar = "update Andre.CATEGORIATBL set CATNOME='"+CatNome.getText()+"'"+"where CATID ="+CatId.getText();
+            Con = DriverManager.getConnection("CONEXAO","USER","SENHA");   
+            String Editar = "update DB.CATEGORIATBL set CATNOME='"+CatNome.getText()+"'"+"where CATID ="+CatId.getText();
             Statement Add = Con.createStatement();
             Add.executeUpdate(Editar);
             JOptionPane.showMessageDialog(this,"Categoria Editada com sucesso");
