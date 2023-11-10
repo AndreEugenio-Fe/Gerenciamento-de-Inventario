@@ -7,7 +7,7 @@ Projeto para Gerenciar Inventário
 
 Bibliotecas utilizadas:
 
-•rs2xml
+• rs2xml
 
 Tela de Login:
 ![Login](https://github.com/AndreEugenio-Fe/Gerenciamento-de-Inventario/assets/116469404/154f5c17-0670-43ad-af5f-4f2eeeb5cdef)
